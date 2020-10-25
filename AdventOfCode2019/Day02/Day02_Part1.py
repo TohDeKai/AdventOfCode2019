@@ -1,11 +1,5 @@
-puzzle_text = open("AdventOfCode2019\Day02\Day02_PuzzleText.txt",'r')
-file = puzzle_text.read()
-puzzle_list = []
-for i in file:
-    if i != ',':
-        puzzle_list.append(i)
-puzzle_text.close()
-#print (puzzle_list[:10])
+with open("AdventOfCode2019\Day02\Day02_PuzzleText.txt") as f:
+    puzzle_list = [int(x) for x in f.readline().split(',')]
 
 '''
 test1 = [1,9,10,3,
@@ -30,7 +24,7 @@ def Intcode(my_list):
     # Made a copy of the list so original data will not be replaced
     copiedlist = my_list.copy()
     opcode = 0
-    while copiedlist[opcode] == 1 or copiedlist[opcode] == 2 or copiedlist[opcode] == 99:
+    while copiedlist[opcode] != 99:
         if copiedlist[opcode] == 1:
             #addition
             result = copiedlist[copiedlist[opcode+1]] + copiedlist[copiedlist[opcode+2]]
@@ -41,9 +35,6 @@ def Intcode(my_list):
             result = copiedlist[copiedlist[opcode+1]] * copiedlist[copiedlist[opcode+2]]
             copiedlist[copiedlist[opcode+3]] = result
             opcode += 4
-        elif copiedlist[opcode] == 99:
-            #halt
-            break
     return copiedlist
 
 '''
@@ -57,7 +48,4 @@ print (Intcode(test5)==test5output)
 
 puzzle_list[1] = 12
 puzzle_list[2] = 2
-
 print (Intcode(puzzle_list)[0])
-
-
